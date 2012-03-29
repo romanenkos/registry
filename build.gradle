@@ -1,0 +1,185 @@
+apply plugin: 'java'
+
+
+repositories {
+    mavenCentral()
+    maven {
+        url "http://mvnrepository.com/"
+    }
+
+}
+
+
+
+System.setProperty("file.encoding", "UTF-8")
+System.setProperty("sun.jnu.encoding", "UTF-8")
+
+jar.archiveName = '2dp.jar'
+
+[compileJava, compileTestJava]*.options.collect {options -> options.encoding = 'UTF-8'}
+
+dependencies {
+    compile ('net.sf.json-lib:json-lib:2.4:jdk15')
+}
+test.useTestNG()
+
+jar.dependsOn 'native2ascii'
+
+task native2ascii << {
+    ant.delete() {
+        fileset(dir: "${processResources.destinationDir}") {
+            include(name: 'bundle*.properties')
+        }
+    }
+    ant.native2ascii(src: 'src/main/resources/',
+            dest: "${processResources.destinationDir}",
+            includes: '**/bundle*.properties',
+            encoding: 'UTF-8')
+}
+
+//
+//task vcsNumber << {
+//
+//    if (rootProject.hasProperty('teamcity')) {
+//        println teamcity['vcs.build.number']
+//    } else {
+//        println 'Not teamcity build'
+//    }
+//
+//    File revision = new File("${processResources.destinationDir}/revision.properties");
+//    revision.write('revision.version= 100500', 'utf-8')
+//
+//}
+
+//sonarAnalyze.dependsOn 'classes'
+//sonar {
+//    server {
+//        url = "http://localhost:9000"
+//    }
+//    database {
+//        url = "jdbc:postgresql://localhost:5432/sonar"
+//        driverClassName = "org.postgresql.Driver"
+//        username = "sonar"
+//        password = "sonar"
+//    }
+//}
+
+//<property name="sonar.binaries" value="${classes.dir}" />
+//<property name="sonar.sources" value="${src.dir}" />
+//<property name="sonar.tests" value="${src.test.dir}" />
+//<property name="sonar.projectName" value="Pkflux" />
+
+
+
+
+
+//ant.importBuild 'build.xml'
+//
+//apply plugin: 'groovy'
+//apply plugin: 'tomcat'
+//
+//buildscript {
+//    repositories {
+//        add(new org.apache.ivy.plugins.resolver.URLResolver()) {
+//            name = 'GitHub'
+//            addArtifactPattern 'http://cloud.github.com/downloads/[organisation]/[module]/[module]-[revision].[ext]'
+//        }
+//    }
+//    dependencies {
+//        classpath 'bmuschko:gradle-tomcat-plugin:0.8.1'
+//    }
+//}
+//
+//repositories {
+//    mavenCentral()
+//}
+//
+//dependencies {
+//    providedCompile fileTree(dir: 'webapp-src/WEB-INF/lib', include: '*.jar'),
+//            fileTree(dir: 'lib', include: '*.jar', excludes: ['*sources.jar', '*javadoc.jar']),
+//            fileTree(dir: 'lib/jaxb', include: '*.jar', excludes: ['*sources.jar', '*javadoc.jar'])
+//
+//    def springVersion = '3.1.0.RELEASE'
+//    testCompile 'org.seleniumhq.selenium:selenium-java:2.15.0',
+//            'org.hamcrest:hamcrest-core:1.2.1',
+//            'org.hamcrest:hamcrest-library:1.2.1',
+//            'com.h2database:h2:1.3.162',
+//            'org.testng:testng:6.1.1',
+//            'org.mockito:mockito-core:1.9.0',
+//            "org.springframework:spring-jdbc:${springVersion}",
+//            "org.springframework:spring-test:${springVersion}"
+//
+//    groovy 'org.codehaus.groovy:groovy:1.8.5'
+//
+//    def tomcatVersion = '6.0.35'
+//    tomcat "org.apache.tomcat:catalina:${tomcatVersion}",
+//            "org.apache.tomcat:coyote:${tomcatVersion}",
+//            "org.apache.tomcat:jasper:${tomcatVersion}",
+//            "org.apache.tomcat:dbcp:${tomcatVersion}"
+//}
+//
+//sourceSets {
+//    main {
+//        java {
+//            srcDir 'src'
+//        }
+//        resources {
+//            srcDir 'src'
+//        }
+//    }
+//    test {
+//        java {
+//            srcDir 'src-test/java'
+//        }
+//        groovy {
+//            srcDir 'src-test/groovy'
+//        }
+//        resources {
+//            srcDir 'src-test/resources'
+//        }
+//    }
+//}
+//
+//tomcatRun {
+//    webAppSourceDirectory = file('./build')
+//    contextPath = '/orion'
+//    configFile = file('./src-test/resources/conf/web/orion.xml')
+//    additionalRuntimeJars = files('./scripts/lib/jtds-1.2.5.jar', './scripts/lib/mail.jar')
+//    daemon = true
+//    stopKey = 'QWE'
+//}
+//
+//tomcatStop {
+//    webAppSourceDirectory = file('./build')
+//    contextPath = '/orion'
+//    configFile = file('./src-test/resources/conf/web/orion.xml')
+//    additionalRuntimeJars = files('./scripts/lib/jtds-1.2.5.jar', './scripts/lib/mail.jar')
+//    daemon = true
+//    stopKey = 'QWE'
+//}
+//
+//tasks['site.jsminify'].enabled = false
+//
+//test {
+//    useTestNG()
+//    exclude '**/*WebTest.class'
+//}
+//
+//task seleniumTest(type: Test) {
+//    useTestNG()
+//    dependsOn 'site.compile', 'restoreLucene', 'tomcatRun'
+//    include '**/*WebTest.class'
+//    doLast {
+//        tomcatStop.execute()
+//    }
+//}
+//
+//task backupLucene(type: Copy) {
+//    from 'build/WEB-INF/lucene'
+//    into './lucene'
+//}
+//
+//task restoreLucene(type: Copy) {
+//    from './lucene'
+//    into 'build/WEB-INF/lucene'
+//}

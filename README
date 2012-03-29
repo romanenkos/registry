@@ -1,0 +1,7 @@
+The aim is to get info about doctor's schedule if yo know his name.
+The aim is to get info about doctor's schedule for your address.
+
+
+data - directory with data to dig in
+data\departments - directory with existent departments. Each folder in this directory represent a department. Each department should contain addresses.txt doctors.txt
+data\doctors - directory with existent doctors. Each folder represent a doctor. Each doctor directory should contain  info.txt  extraSchedule.json regularSchedule.json
