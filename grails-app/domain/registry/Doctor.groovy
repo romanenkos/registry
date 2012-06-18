@@ -8,7 +8,9 @@ class Doctor {
     String getFullName() {
         "${firstName} ${lastName}"
     }
-    static hasMany = [scheduleItems: ScheduleItem]
+
+    static hasMany = [scheduleItems: ScheduleItem, districts: District]
+    static belongsTo = District
 
     static constraints = {
     }
