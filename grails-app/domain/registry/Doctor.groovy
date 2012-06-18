@@ -5,6 +5,10 @@ class Doctor {
     String middleName
     String lastName
 
+    String getFullName() {
+        "${firstName} ${lastName}"
+    }
+
     static hasMany = [scheduleItems: ScheduleItem, districts: District]
     static belongsTo = District
 
