@@ -1,6 +1,8 @@
 import registry.Doctor
 import registry.District
 import registry.Address
+import registry.DayOfWeek
+import registry.ScheduleItem
 
 class BootStrap {
 
@@ -8,12 +10,17 @@ class BootStrap {
 
         List<District> districts;
         3.times {
-            new Doctor(firstName: "Fname${it}", middleName: "MName${it}", lastName: "LName${it}").save()
+            def d = new Doctor(firstName: "Fname${it}", middleName: "MName${it}", lastName: "LName${it}").save()
+            DayOfWeek.values().each {
+                d.addToScheduleItems(new ScheduleItem(day: it, hourFrom: 9, minuteFrom: 0, hourTo: 17, minuteTo: 59))
+            }
+            d.save()
 
-            District d = new District(number: "${it}")
+
+            District district = new District(number: "${it}")
             Set<Address> addresses = new HashSet<Address>();
             3.times { it1 ->
-                Address a = new Address(district: d, street: "D${it}-Street${it1}", number: "D${it}-N${it1}" )
+                Address a = new Address(district: district, street: "D${it}-Street${it1}", number: "D${it}-N${it1}" )
                 addresses.add(a);
             }
 
