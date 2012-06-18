@@ -5,7 +5,8 @@ class Doctor {
     String middleName
     String lastName
 
-    static hasMany = [scheduleItems: ScheduleItem]
+    static hasMany = [scheduleItems: ScheduleItem, districts: District]
+    static belongsTo = District
 
     static constraints = {
     }

@@ -14,17 +14,23 @@ class BootStrap {
             DayOfWeek.values().each {
                 d.addToScheduleItems(new ScheduleItem(day: it, hourFrom: 9, minuteFrom: 0, hourTo: 17, minuteTo: 59))
             }
-            d.save()
+
 
 
             District district = new District(number: "${it}")
-            Set<Address> addresses = new HashSet<Address>();
             3.times { it1 ->
-                Address a = new Address(district: district, street: "D${it}-Street${it1}", number: "D${it}-N${it1}" )
-                addresses.add(a);
+                district.addToAddresses(new Address(district: district, street: "D${it}-Street${it1}", number: "D${it}-N${it1}"));
             }
 
-            d.addresses = addresses
+            if (!district.save()) {
+                district.errors.each { er ->
+                    println er
+                }
+            }
+
+
+            d.addToDistricts(district)
+
             if (!d.save()) {
                 d.errors.each { er ->
                     println er
