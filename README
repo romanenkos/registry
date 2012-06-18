@@ -1,10 +1,7 @@
-The aim is to get info about doctor's schedule if yo know his name.
-The aim is to get info about doctor's schedule for your address.
+BACKLOG
 
+Refactor schedule timings to plain text (1:HIGH)
+Display doctors by address (3:LOW)
 
-data - directory with data to dig in
-data\departments - directory with existent departments. Each folder in this directory represent a department. Each department should contain addresses.txt doctors.txt
-data\doctors - directory with existent doctors. Each folder represent a doctor. Each doctor directory should contain  info.txt  extraSchedule.json regularSchedule.json
-
-
-Test commit from jk
+SPRINTS
+1: 2 h / 10 pts
