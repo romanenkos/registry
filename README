@@ -1,6 +1,9 @@
 BACKLOG
 
-Refactor schedule timings to plain text (1:HIGH)
+Setup GIT in IDEA (CRITICAL)
+Refactor schedule (2:HIGH)
+- timings to plain text
+- add and display room
 Display doctors by address (3:LOW)
 
 SPRINTS

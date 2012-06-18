@@ -6,7 +6,7 @@ class Doctor {
     String lastName
 
     String getFullName() {
-        "${firstName} ${lastName}"
+        "${firstName} ${lastName}"//TODO inject middle name
     }
 
     static hasMany = [scheduleItems: ScheduleItem, districts: District]
