@@ -10,7 +10,7 @@ class ScheduleItem {
     int minuteFrom
     int minuteTo
 
-    static belongsTo = [doctor: Doctor]
+    Doctor doctor
 
     static constraints = {
     }
