@@ -6,6 +6,17 @@ Refactor schedule (2:HIGH)
 - add and display room
 Display doctors by address (3:LOW)
 
+
+
+As a patient I want to know schedule of my doctor for future
+As a patient I want to know that schedule was updated recently, I want to know that schedule actual
+
+
+As a manager I want to put vacations sick days etc. into schedule of doctor
+As a manager I want to update data in comfortable way.
+
+
+
 SPRINTS
 1: 2 h / 10 pts
 
