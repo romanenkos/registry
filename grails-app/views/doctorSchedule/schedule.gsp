@@ -18,16 +18,16 @@
         <thead>
         <tr>
             <th>Day</th>
-            <th>From</th>
-            <th>To</th>
+            <th>Room</th>
+            <th>WorkingTime</th>
         </tr>
         </thead>
         <tbody>
         <g:each in="${items}" status="i" var="item">
             <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
                 <td>${item.day}</td>
-                <td>${item.from}</td>
-                <td>${item.to}</td>
+                <td>${item.room}</td>
+                <td>${item.workingTime}</td>
             </tr>
         </g:each>
         </tbody>

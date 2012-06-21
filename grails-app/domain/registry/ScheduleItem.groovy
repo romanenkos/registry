@@ -3,13 +3,8 @@ package registry
 class ScheduleItem {
 
     DayOfWeek day
-
-    int hourFrom
-    int hourTo
-
-    int minuteFrom
-    int minuteTo
-
+    String room
+    String workingTime
     Doctor doctor
 
     static constraints = {

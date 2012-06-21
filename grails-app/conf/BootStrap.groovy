@@ -10,8 +10,8 @@ class BootStrap {
 
         3.times {
             def doctor = new Doctor(firstName: "Fname${it}", middleName: "MName${it}", lastName: "LName${it}").save()
-            DayOfWeek.values().each {
-                doctor.addToScheduleItems(new ScheduleItem(day: it, hourFrom: 9, minuteFrom: 0, hourTo: 17, minuteTo: 59))
+            DayOfWeek.values().each {  day ->
+                doctor.addToScheduleItems(new ScheduleItem(day: day, workingTime: "9:00 - 18:00", room: "20${it}"))
             }
 
 
