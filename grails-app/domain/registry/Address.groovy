@@ -2,8 +2,9 @@ package registry
 
 class Address {
 
-    String street
-    String number
+    String address
+
+
     District district
 
 

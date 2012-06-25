@@ -18,7 +18,7 @@ class BootStrap {
 
             District district = new District(number: "District-${it}")
             3.times { it1 ->
-                district.addToAddresses(new Address(district: district, street: "D${it}-Street${it1}", number: "D${it}-N${it1}"));
+                district.addToAddresses(new Address(district: district, address: "D${it}-Street${it1}"));
             }
 
             district.save()
