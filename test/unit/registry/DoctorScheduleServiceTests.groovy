@@ -1,25 +1,13 @@
 package registry
 
-
-
-import grails.test.mixin.*
-import org.junit.*
-
-import static registry.DayOfWeek.FRI
-import static registry.DayOfWeek.MON
-import static registry.DayOfWeek.THU
-import static registry.ScheduleItemType.REGULAR
-import static registry.ScheduleItemType.IRREGULAR
-import static registry.DayOfWeek.WED
-import static registry.DayOfWeek.TUE
-import org.apache.commons.lang.time.DateUtils
+import grails.test.mixin.Mock
+import grails.test.mixin.TestFor
+import org.junit.Test
 
 import static org.apache.commons.lang.time.DateUtils.addDays
-import static java.util.Calendar.DAY_OF_WEEK
-import static java.util.Calendar.MONDAY
-import static java.util.Calendar.getInstance
-import static java.util.Calendar.WEDNESDAY
-import static registry.DayOfWeek.dateForDayOfWeek
+import static registry.DayOfWeek.*
+import static registry.ScheduleItemType.IRREGULAR
+import static registry.ScheduleItemType.REGULAR
 
 @TestFor(DoctorScheduleService)
 @Mock([Doctor, ScheduleItem])
@@ -35,7 +23,7 @@ class DoctorScheduleServiceTests {
         //when
         def schedule = service.findSchedule(d)
         //then
-        assert [MON, THU, FRI] == schedule.collect{it.day}
+        assert [MON, THU, FRI] == schedule.collect {it.day}
     }
 
     @Test
@@ -58,19 +46,46 @@ class DoctorScheduleServiceTests {
     }
 
     @Test
-    void whenFindScheduleThenOverrideWithIrregularConsideringDate() {
-        //TODO test should be reviewed after adding method to DayOfWeek input data 1 Reg Mon and 3 Irreg Mon past, present and future. Regulra Mon should be overwritted with present Irreg Mon
-
+    void whenFindScheduleThenIgnoreIrregularInThePast() {
         //given
         def d = new Doctor(firstName: "fname", lastName: "lname", middleName: "mname")
                 .addToScheduleItems(new ScheduleItem(day: MON, type: REGULAR, workingTime: "09:00 - 17:00"))
-                .addToScheduleItems(new ScheduleItem(day: TUE, type: REGULAR, workingTime: "09:00 - 17:00"))
-                .addToScheduleItems(new ScheduleItem(type: IRREGULAR, workingTime: "DAY OFF1", date: addDays(new Date(), -30)))
+                .addToScheduleItems(new ScheduleItem(type: IRREGULAR, workingTime: "DAY OFF1", date: dateForDayOfWeek(MON, addDays(new Date(), -30))))
                 .addToScheduleItems(new ScheduleItem(type: IRREGULAR, workingTime: "DAY OFF2", date: dateForDayOfWeek(MON))).save()
         //when
         def schedule = service.findSchedule(d)
         //then
-        assert schedule.size() == 2
+        assert schedule.size() == 1
         assert schedule[0].workingTime == "DAY OFF2"
     }
+
+    @Test
+    void whenFindScheduleThenIgnoreIrregularInTheFuture() {
+        //given
+        def d = new Doctor(firstName: "fname", lastName: "lname", middleName: "mname")
+                .addToScheduleItems(new ScheduleItem(day: MON, type: REGULAR, workingTime: "09:00 - 17:00"))
+                .addToScheduleItems(new ScheduleItem(type: IRREGULAR, workingTime: "DAY OFF1", date: dateForDayOfWeek(MON, addDays(new Date(), 30))))
+                .addToScheduleItems(new ScheduleItem(type: IRREGULAR, workingTime: "DAY OFF2", date: dateForDayOfWeek(MON))).save()
+        //when
+        def schedule = service.findSchedule(d)
+        //then
+        assert schedule.size() == 1
+        assert schedule[0].workingTime == "DAY OFF2"
+    }
+
+    @Test
+    void whenFindScheduleAndNoIrregularForCurrentWeekThenDontOverrideRegularSchedule() {
+        //given
+        def d = new Doctor(firstName: "fname", lastName: "lname", middleName: "mname")
+                .addToScheduleItems(new ScheduleItem(day: MON, type: REGULAR, workingTime: "09:00 - 17:00"))
+                .addToScheduleItems(new ScheduleItem(type: IRREGULAR, workingTime: "DAY OFF1", date: dateForDayOfWeek(MON, addDays(new Date(), -30))))
+                .addToScheduleItems(new ScheduleItem(type: IRREGULAR, workingTime: "DAY OFF2", date: dateForDayOfWeek(MON, addDays(new Date(), 30))))
+                .save()
+        //when
+        def schedule = service.findSchedule(d)
+        //then
+        assert schedule.size() == 1
+        assert schedule[0].workingTime == "09:00 - 17:00"
+    }
+
 }

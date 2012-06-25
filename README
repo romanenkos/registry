@@ -2,27 +2,23 @@ BACKLOG
 
 
 
-Display Doc By Address
+Display Doctor By Address
     - generate links to Schedule
-Display Schedlue
-    - write more test for Regular Irregular
 
-Choose weeks for display schedule
-    - Same controller as schedule display.
-    - Pass number of week
+Choose weeks for display Doctor schedule
+    - Same controller as doctor schedule display
+    - Pass number of week to show schedule
 
 
 
-As a patient I want to know schedule of my doctor for future
 As a patient I want to know that schedule was updated recently, I want to know that schedule actual
-
-
 As a manager I want to put vacations, sick days, etc. into doctor's schedule
 As a manager I want to update data in comfortable way.
 
 
-
 SPRINTS
 1: 2 h / 10 pts
-2: 2 h / 1 pt
-Test Commit
+2: 2 h / 01 pt
+3:
+4:
+5:

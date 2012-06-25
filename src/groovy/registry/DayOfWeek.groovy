@@ -1,35 +1,42 @@
 package registry
 
-import org.apache.commons.lang.time.DateUtils
-
-import static java.util.Calendar.getInstance
-import static java.util.Calendar.DAY_OF_WEEK
-import static java.util.Calendar.WEDNESDAY
-import static java.util.Calendar.MONDAY
+import static java.util.Calendar.*
 import static org.apache.commons.lang.time.DateUtils.truncate
-import static java.util.Calendar.DAY_OF_WEEK
 
 public enum DayOfWeek {
     MON(Calendar.MONDAY), TUE(Calendar.TUESDAY), WED(Calendar.WEDNESDAY), THU(Calendar.THURSDAY), FRI(Calendar.FRIDAY), SAT(Calendar.SATURDAY), SUN(Calendar.SUNDAY)
 
-    private int dayOfWeek
+    private int dayOfWeekForCalendar
 
-    DayOfWeek(int dayOfWeek) {
-        this.dayOfWeek = dayOfWeek
+    DayOfWeek(int dayOfWeekForCalendar) {
+        this.dayOfWeekForCalendar = dayOfWeekForCalendar
     }
 
-    int toCalendarDayOfWeek() {
-        return dayOfWeek
+    int forCalendarAPI() {
+        return dayOfWeekForCalendar
     }
 
     static Date startDateOfCurrentWeek() {
         return dateForDayOfWeek(MON)
     }
 
-    static Date dateForDayOfWeek(DayOfWeek dayOfWeek) {
+    static Date endDateOfCurrentWeek() {
+        return dateForDayOfWeek(SUN)
+    }
+
+    static Date startDateOfWeek(Date dateWithinWeek) {
+        return dateForDayOfWeek(MON, dateWithinWeek)
+    }
+
+    static Date endDateOfWeek(Date dateWithinWeek) {
+        return dateForDayOfWeek(SUN, dateWithinWeek)
+    }
+
+    static Date dateForDayOfWeek(DayOfWeek dayOfWeek, Date date = new Date()) {
         Calendar cnd = getInstance()
         cnd.setFirstDayOfWeek(MONDAY)
-        cnd.set(DAY_OF_WEEK, dayOfWeek.toCalendarDayOfWeek())
+        cnd.time = date
+        cnd.set(DAY_OF_WEEK, dayOfWeek.forCalendarAPI())
         return truncate(cnd.time, Calendar.DATE)
     }
 
@@ -39,19 +46,19 @@ public enum DayOfWeek {
         cnd.time = date
         switch (cnd.get(Calendar.DAY_OF_WEEK)) {
             case Calendar.MONDAY:
-                return DayOfWeek.MON;
+                return MON
             case Calendar.TUESDAY:
-                return DayOfWeek.TUE;
+                return TUE
             case Calendar.WEDNESDAY:
-                return DayOfWeek.WED;
+                return WED
             case Calendar.THURSDAY:
-                return DayOfWeek.THU;
+                return THU
             case Calendar.FRIDAY:
-                return DayOfWeek.FRI;
+                return FRI
             case Calendar.SATURDAY:
-                return DayOfWeek.SAT;
+                return SAT
             case Calendar.SUNDAY:
-                return DayOfWeek.SUN;
+                return SUN
         }
         throw new IllegalAccessException("Incorrect date ${date}")
     }
