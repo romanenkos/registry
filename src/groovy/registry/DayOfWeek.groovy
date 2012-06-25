@@ -32,4 +32,27 @@ public enum DayOfWeek {
         cnd.set(DAY_OF_WEEK, dayOfWeek.toCalendarDayOfWeek())
         return truncate(cnd.time, Calendar.DATE)
     }
+
+    static DayOfWeek dayOfWeekByDate(Date date) {
+        def cnd = Calendar.getInstance()
+        cnd.setFirstDayOfWeek(Calendar.MONDAY)
+        cnd.time = date
+        switch (cnd.get(Calendar.DAY_OF_WEEK)) {
+            case Calendar.MONDAY:
+                return DayOfWeek.MON;
+            case Calendar.TUESDAY:
+                return DayOfWeek.TUE;
+            case Calendar.WEDNESDAY:
+                return DayOfWeek.WED;
+            case Calendar.THURSDAY:
+                return DayOfWeek.THU;
+            case Calendar.FRIDAY:
+                return DayOfWeek.FRI;
+            case Calendar.SATURDAY:
+                return DayOfWeek.SAT;
+            case Calendar.SUNDAY:
+                return DayOfWeek.SUN;
+        }
+        throw new IllegalAccessException("Incorrect date ${date}")
+    }
 }
