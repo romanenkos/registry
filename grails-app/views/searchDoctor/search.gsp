@@ -5,7 +5,7 @@
     <meta name="layout" content="main">
     <title>
         <g:if test="${address}">
-            Results for address ${address.address}!
+            Results for address: ${address.address}
         </g:if>
         <g:else>
             Type address to find doctors for your district
@@ -29,7 +29,7 @@
 
 <g:if test="${district}">
     <div id="result" class="content">
-        <h1>Doctors for district #${district.number}</h1>
+        <h1>Doctors for district: ${district.number}</h1>
         <table>
             <thead>
             <tr>
