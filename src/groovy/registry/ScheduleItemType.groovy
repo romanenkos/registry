@@ -1,5 +1,5 @@
 package registry
 
-enum ScheduleType {
+enum ScheduleItemType {
     REGULAR, IRREGULAR
 }

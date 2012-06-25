@@ -5,7 +5,7 @@ class ScheduleItem {
     DayOfWeek day
     String room
     String workingTime
-    ScheduleType type
+    ScheduleItemType type
     Date date
     Doctor doctor
 
