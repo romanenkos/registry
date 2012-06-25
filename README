@@ -1,12 +1,15 @@
 BACKLOG
 
-Need review of
-    Refactor schedule (2:HIGH)
-    - timings to plain text
-    - add and display room
 
 
-Display doctors by address (3:LOW)
+Display Doc By Address
+    - generate links to Schedule
+Display Schedlue
+    - write more test for Regular Irregular
+
+Choose weeks for display schedule
+    - Same controller as schedule display.
+    - Pass number of week
 
 
 
@@ -21,5 +24,5 @@ As a manager I want to update data in comfortable way.
 
 SPRINTS
 1: 2 h / 10 pts
-
+2: 2 h / 1 pt
 Test Commit

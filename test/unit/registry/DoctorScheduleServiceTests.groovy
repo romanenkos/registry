@@ -59,6 +59,8 @@ class DoctorScheduleServiceTests {
 
     @Test
     void whenFindScheduleThenOverrideWithIrregularConsideringDate() {
+        //TODO test should be reviewed after adding method to DayOfWeek input data 1 Reg Mon and 3 Irreg Mon past, present and future. Regulra Mon should be overwritted with present Irreg Mon
+
         //given
         def d = new Doctor(firstName: "fname", lastName: "lname", middleName: "mname")
                 .addToScheduleItems(new ScheduleItem(day: MON, type: REGULAR, workingTime: "09:00 - 17:00"))
