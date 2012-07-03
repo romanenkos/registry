@@ -39,7 +39,7 @@
             <tbody>
             <g:each in="${district.doctors}" status="i" var="item">
                 <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-                    <td>${item.fullName}</td>
+                    <td><g:link controller="doctorSchedule" action="schedule" params="[id: item.id]">${item.fullName}</g:link></td>
                 </tr>
             </g:each>
             </tbody>

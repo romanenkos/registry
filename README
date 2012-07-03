@@ -2,16 +2,23 @@ BACKLOG
 
 
 
+TODO: code review
+TODO: possible add additional tests for situation when weeksCount GT 0
+
+
+
+
 Display Doctor By Address
-    - generate links to Schedule
+    - generate links to Schedule - NEED REVIEW
 
 Choose weeks for display Doctor schedule
-    - Same controller as doctor schedule display
-    - Pass number of week to show schedule
+    - Same controller as doctor schedule display - NEED REVIEW
+    - Pass number of week to show schedule - NEED REVIEW
 
 
 
 As a patient I want to know that schedule was updated recently, I want to know that schedule actual
+As a manager I want to separate schedule for Districts and schedule for Specialists
 As a manager I want to put vacations, sick days, etc. into doctor's schedule
 As a manager I want to update data in comfortable way.
 

@@ -20,6 +20,7 @@
             <th>Day</th>
             <th>Room</th>
             <th>WorkingTime</th>
+            <th>Date</th>
         </tr>
         </thead>
         <tbody>
@@ -28,8 +29,17 @@
                 <td>${item.day}</td>
                 <td>${item.room}</td>
                 <td>${item.workingTime}</td>
+                <td><g:formatDate format="dd-MM-yyyy" date="${item.date}"/></td>
             </tr>
         </g:each>
+        <tr>
+            <td colspan="3">
+                <g:if test="${w > 0}">
+                    <g:link action="schedule" params="[id: doctor.id, w: w - 1]">Back</g:link>
+                </g:if>
+                <g:link action="schedule" params="[id: doctor.id, w: w + 1]">Forward</g:link>
+            </td>
+        </tr>
         </tbody>
     </table>
 </div>

@@ -21,7 +21,7 @@ class DoctorScheduleServiceTests {
                 .addToScheduleItems(new ScheduleItem(day: MON, type: REGULAR))
                 .addToScheduleItems(new ScheduleItem(day: THU, type: REGULAR)).save()
         //when
-        def schedule = service.findSchedule(d)
+        def schedule = service.findSchedule(d, 0)
         //then
         assert [MON, THU, FRI] == schedule.collect {it.day}
     }
@@ -38,7 +38,7 @@ class DoctorScheduleServiceTests {
                 .addToScheduleItems(new ScheduleItem(date: dateForDayOfWeek(MON), type: IRREGULAR, workingTime: "DAY OFF"))
                 .addToScheduleItems(new ScheduleItem(date: dateForDayOfWeek(WED), type: IRREGULAR, workingTime: "DAY OFF")).save()
         //when
-        def schedule = service.findSchedule(d)
+        def schedule = service.findSchedule(d, 0)
         //then
         assert schedule.size() == 5
         assert schedule[0].workingTime == "DAY OFF"
@@ -53,7 +53,7 @@ class DoctorScheduleServiceTests {
                 .addToScheduleItems(new ScheduleItem(type: IRREGULAR, workingTime: "DAY OFF1", date: dateForDayOfWeek(MON, addDays(new Date(), -30))))
                 .addToScheduleItems(new ScheduleItem(type: IRREGULAR, workingTime: "DAY OFF2", date: dateForDayOfWeek(MON))).save()
         //when
-        def schedule = service.findSchedule(d)
+        def schedule = service.findSchedule(d, 0)
         //then
         assert schedule.size() == 1
         assert schedule[0].workingTime == "DAY OFF2"
@@ -67,7 +67,7 @@ class DoctorScheduleServiceTests {
                 .addToScheduleItems(new ScheduleItem(type: IRREGULAR, workingTime: "DAY OFF1", date: dateForDayOfWeek(MON, addDays(new Date(), 30))))
                 .addToScheduleItems(new ScheduleItem(type: IRREGULAR, workingTime: "DAY OFF2", date: dateForDayOfWeek(MON))).save()
         //when
-        def schedule = service.findSchedule(d)
+        def schedule = service.findSchedule(d, 0)
         //then
         assert schedule.size() == 1
         assert schedule[0].workingTime == "DAY OFF2"
@@ -82,10 +82,12 @@ class DoctorScheduleServiceTests {
                 .addToScheduleItems(new ScheduleItem(type: IRREGULAR, workingTime: "DAY OFF2", date: dateForDayOfWeek(MON, addDays(new Date(), 30))))
                 .save()
         //when
-        def schedule = service.findSchedule(d)
+        def schedule = service.findSchedule(d, 0)
         //then
         assert schedule.size() == 1
         assert schedule[0].workingTime == "09:00 - 17:00"
     }
+
+    //TODO add tests for weekCount GT 0
 
 }
