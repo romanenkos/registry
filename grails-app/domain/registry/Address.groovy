@@ -7,6 +7,6 @@ class Address {
 
 
     static constraints = {
-
+         address maxSize: 500
     }
 }

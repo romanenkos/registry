@@ -6,12 +6,7 @@
     <title>Schedule for doctor ${doctor.fullName}</title>
 </head>
 <body>
-<div class="nav" role="navigation">
-    <ul>
-        <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-        <li><g:link class="create" action="create">QWE</g:link></li>
-    </ul>
-</div>
+<g:render template="/shared/navigtion"/>
 <div id="list-scheduleItem" class="content scaffold-list" role="main">
     <h1>Schedule for doctor ${doctor.fullName}</h1>
     <table>

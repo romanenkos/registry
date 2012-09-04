@@ -12,6 +12,26 @@ public enum DayOfWeek {
         this.dayOfWeekForCalendar = dayOfWeekForCalendar
     }
 
+    public String getName(){
+        switch (dayOfWeekForCalendar) {
+            case Calendar.MONDAY:
+                return 'Понедiлок'
+            case Calendar.TUESDAY:
+                return 'Вiвторок'
+            case Calendar.WEDNESDAY:
+                return 'Середа'
+            case Calendar.THURSDAY:
+                return 'Четвер'
+            case Calendar.FRIDAY:
+                return 'П\'ятниця'
+            case Calendar.SATURDAY:
+                return 'Субота'
+            case Calendar.SUNDAY:
+                return 'Недiля'
+        }
+        return ''
+    }
+
     int forCalendarAPI() {
         return dayOfWeekForCalendar
     }
