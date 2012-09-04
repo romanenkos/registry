@@ -10,7 +10,5 @@ class DoctorScheduleController {
             [doctor: doctor, items: doctorScheduleService.findSchedule(doctor, w), w: w]
         }
     }
-    def byId(long id) {
-        def doctor = Doctor.findById(id)
-    }
+
 }

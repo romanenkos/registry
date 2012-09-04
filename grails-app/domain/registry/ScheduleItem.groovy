@@ -9,6 +9,9 @@ class ScheduleItem {
     Date date
     Doctor doctor
 
+    static mapping = {
+        day(enumType: "ordinal")
+    }
     static constraints = {
         date nullable: true
     }

@@ -14,6 +14,9 @@ class Doctor {
     static hasMany = [scheduleItems: ScheduleItem]
 
 
+    static mapping = {
+        scheduleItems sort: 'day', order: 'asc'
+    }
     static constraints = {
     }
 }
