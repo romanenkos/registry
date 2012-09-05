@@ -24,9 +24,9 @@ class Doctor implements Comparable<Doctor>{
     int compareTo(Doctor doctor) {
         if (doctor) {
             if (!doctor.speciality.equals(this.speciality)) {
-                return -1 * doctor.speciality.getName().compareTo(this.speciality.getName())
+                return this.speciality.getName() <=> doctor.speciality.getName()
             } else {
-                return -1 * doctor.getFullName().compareTo(this.getFullName())
+                return this.getFullName() <=> doctor.getFullName()
             }
         }
         return 1

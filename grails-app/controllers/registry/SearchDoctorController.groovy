@@ -16,9 +16,7 @@ class SearchDoctorController {
     }
 
     def byLastName(String lastName) {
-        def specialists = Doctor.findAllByLastNameLike("%${lastName}%")
-        Collections.sort(specialists)
-        render(view: "list", model: [specialists: specialists])
+        render(view: "list", model: [specialists: Doctor.findAllByLastNameLike("%${lastName}%").sort()])
     }
 
     def scheduleById(long id) {
@@ -30,15 +28,11 @@ class SearchDoctorController {
     }
 
     def allSpecialists() {
-        def specialists = Doctor.findAllBySpecialityNotEqual(Speciality.S0)
-        Collections.sort(specialists)
-        render(view: "list", model: [specialists: specialists])
+        render(view: "list", model: [specialists: Doctor.findAllBySpecialityNotEqual(Speciality.S0).sort()])
     }
 
     def allDistrctDoctors() {
-        def specialists = Doctor.findAllBySpeciality(Speciality.S0)
-        Collections.sort(specialists)
-        render(view: "list", model: [specialists: specialists])
+        render(view: "list", model: [specialists: Doctor.findAllBySpeciality(Speciality.S0).sort()])
 
     }
 
