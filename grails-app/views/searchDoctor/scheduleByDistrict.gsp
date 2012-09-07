@@ -20,7 +20,7 @@
             <tr class="${(d % 2) == 0 ? 'even' : 'odd'}">
                 <td>${doctor.fullName}</td>
                 <td>
-                    <g:render template="/shared/doctorSchedule" model="[doctor: doctor]" />
+                    <g:render template="/shared/doctorRegularSchedule" model="[doctor: doctor]" />
                 </td>
             </tr>
         </g:each>

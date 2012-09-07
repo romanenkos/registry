@@ -1,8 +1,8 @@
 package registry
 
-import org.apache.commons.collections.CollectionUtils
-
 class SearchDoctorController {
+
+    DoctorScheduleService doctorScheduleService
 
     def search(String address) {
         if (address) {
@@ -20,7 +20,13 @@ class SearchDoctorController {
     }
 
     def scheduleById(long id) {
-        render(view: "schedule", model: [specialist: Doctor.findById(id)])
+        def doctor = Doctor.findById(id)
+        def model = [:]
+        if (doctor) {
+            model['specialist'] = doctor
+            model ['items'] = doctorScheduleService.findSchedule(doctor, 0)
+        }
+        render(view: "schedule", model: model)
     }
 
     def scheduleByDistrict(long id) {

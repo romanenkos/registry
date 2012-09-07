@@ -10,7 +10,7 @@
 <div id="list-scheduleItem" class="content scaffold-list" role="main">
     <h1>Спецiалiзацiя: ${specialist.speciality.name}</h1>
     <h1>ПIБ: ${specialist.fullName}</h1>
-    <g:render template="/shared/doctorSchedule" model="[doctor: specialist]" />
+    <g:render template="/shared/doctorAdjustedSchedule" model="[scheduleItems: items]" />
 </div>
 </body>
 </html>

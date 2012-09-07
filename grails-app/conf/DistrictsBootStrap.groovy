@@ -4,6 +4,8 @@ import registry.Address
 import registry.DayOfWeek
 import registry.ScheduleItem
 import registry.Speciality
+import registry.ScheduleItemType
+import sun.util.calendar.CalendarUtils
 
 class DistrictsBootStrap {
 
@@ -432,6 +434,18 @@ class DistrictsBootStrap {
         doctor.addToScheduleItems(new ScheduleItem(day: DayOfWeek.WED, workingTime: '12-15', room: '223'))
         doctor.addToScheduleItems(new ScheduleItem(day: DayOfWeek.THU, workingTime: '8-11', room: '223'))
         doctor.addToScheduleItems(new ScheduleItem(day: DayOfWeek.FRI, workingTime: '8-11', room: '223'))
+
+
+        Calendar cnd = Calendar.getInstance();
+        cnd.add(Calendar.DAY_OF_WEEK, 1)
+        doctor.addToScheduleItems(new ScheduleItem(type: ScheduleItemType.IRREGULAR, workingTime: 'Відпустка', date: cnd.getTime()))
+        cnd.add(Calendar.DAY_OF_WEEK, 1)
+        doctor.addToScheduleItems(new ScheduleItem(type: ScheduleItemType.IRREGULAR, workingTime: 'Відпустка', date: cnd.getTime()))
+        cnd.add(Calendar.DAY_OF_WEEK, 1)
+        doctor.addToScheduleItems(new ScheduleItem(type: ScheduleItemType.IRREGULAR, workingTime: 'Відпустка', date: cnd.getTime()))
+        cnd.add(Calendar.DAY_OF_WEEK, 1)
+        doctor.addToScheduleItems(new ScheduleItem(type: ScheduleItemType.IRREGULAR, workingTime: 'Відпустка', date: cnd.getTime()))
+
         doctor.save()
         district1.addToDoctors(doctor)
         district1.save()

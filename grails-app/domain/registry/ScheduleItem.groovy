@@ -14,5 +14,8 @@ class ScheduleItem {
     }
     static constraints = {
         date nullable: true
+        day nullable: true
+        room nullable: true
+
     }
 }
