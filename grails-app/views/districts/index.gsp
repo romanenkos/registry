@@ -6,6 +6,9 @@
 </head>
 <body>
 <g:render template="/shared/navigtion"/>
+<g:if test="${flash.message}">
+    <div class="message" role="status">${flash.message}</div>
+</g:if>
 <div id="" class="content scaffold-list" role="main">
     <h1>Дiльницi</h1>
     <table>
@@ -14,6 +17,7 @@
             <th>№</th>
             <th>Адреси</th>
             <th>Лiкарi</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -29,6 +33,9 @@
                     <g:each in="${district.doctors}" status="doc" var="doctor">
                         <g:link controller="searchDoctor" action="scheduleById" id="${doctor.id}">${doctor.fullName}</g:link> ${doc < (district.doctors.size() - 1) ? '<br/> ' : ''}
                     </g:each>
+                </td>
+                <td>
+                    <g:link controller="district" action="edit" id="${district.id}">Редагувати</g:link>
                 </td>
             </tr>
         </g:each>

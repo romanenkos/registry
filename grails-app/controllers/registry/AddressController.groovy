@@ -16,7 +16,13 @@ class AddressController {
     }
 
     def create() {
-        [addressInstance: new Address(params)]
+        if (params.get("district.id")) {
+            [addressInstance: new Address(params)]
+        } else {
+            flash.message = 'Виберiть дiльницю до якої додати адресу'
+            redirect(controller: 'districts', action: 'index')
+        }
+
     }
 
     def save() {
@@ -27,7 +33,7 @@ class AddressController {
         }
 
         flash.message = message(code: 'default.created.message', args: [message(code: 'address.label', default: 'Address'), addressInstance.id])
-        redirect(action: "show", id: addressInstance.id)
+        redirect(controller: 'district', action: 'show', id: addressInstance.district.id)
     }
 
     def show() {
@@ -79,7 +85,7 @@ class AddressController {
         }
 
         flash.message = message(code: 'default.updated.message', args: [message(code: 'address.label', default: 'Address'), addressInstance.id])
-        redirect(action: "show", id: addressInstance.id)
+        redirect(controller: "district", action: "edit", id: addressInstance.district.id)
     }
 
     def delete() {
