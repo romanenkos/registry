@@ -79,7 +79,7 @@ class AddressController {
         }
 
         flash.message = message(code: 'default.updated.message', args: [message(code: 'address.label', default: 'Address'), addressInstance.id])
-        redirect(action: "show", id: addressInstance.id)
+        redirect(controller: "district", action: "edit", id: addressInstance.district.id)
     }
 
     def delete() {

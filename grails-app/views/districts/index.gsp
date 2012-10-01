@@ -14,6 +14,7 @@
             <th>№</th>
             <th>Адреси</th>
             <th>Лiкарi</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -29,6 +30,9 @@
                     <g:each in="${district.doctors}" status="doc" var="doctor">
                         <g:link controller="searchDoctor" action="scheduleById" id="${doctor.id}">${doctor.fullName}</g:link> ${doc < (district.doctors.size() - 1) ? '<br/> ' : ''}
                     </g:each>
+                </td>
+                <td>
+                    <g:link controller="district" action="edit" id="${district.id}">Редагувати</g:link>
                 </td>
             </tr>
         </g:each>

@@ -15,6 +15,6 @@
 		<g:message code="address.district.label" default="District" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="district" name="district.id" from="${registry.District.list()}" optionKey="id" required="" value="${addressInstance?.district?.id}" class="many-to-one"/>
+	<g:select id="district" name="district.id" from="${registry.District.list()}" optionKey="id" optionValue="id" required="" value="${addressInstance?.district?.id}" class="many-to-one"/>
 </div>
 
