@@ -25,11 +25,29 @@ class ScheduleItemController {
         }
     }
 
+    def createRegular(long id) {
+        Doctor doc = Doctor.findById(id);
+        if (!doc) {
+            render(status: 404, text: 'Доктора нема')
+        } else {
+            params['type'] = ScheduleItemType.REGULAR
+            params['doctor'] = doc
+
+            [scheduleItemInstance: new ScheduleItem(params)]
+        }
+    }
+
     def save() {
+
         params['date'] = params.date('date', 'dd-MM-yyyy')
         def scheduleItemInstance = new ScheduleItem(params)
+
+        if (ScheduleItemType.REGULAR.equals(scheduleItemInstance.type)) {
+            def currentScheduleItem = ScheduleItem.findByDoctorAndDay(scheduleItemInstance.doctor, scheduleItemInstance.day)
+            currentScheduleItem?.delete()
+        }
         if (!scheduleItemInstance.save(flush: true)) {
-            render(view: "createIrregular", model: [scheduleItemInstance: scheduleItemInstance])
+            render(view: ScheduleItemType.REGULAR.equals(scheduleItemInstance.type) ? 'createRegular' : 'createIrregular', model: [scheduleItemInstance: scheduleItemInstance])
             return
         }
 
@@ -46,6 +64,15 @@ class ScheduleItemController {
         }
 
         [scheduleItemInstance: scheduleItemInstance]
+    }
+
+    def editForDoctor(Long id) {
+        def doctor = Doctor.get(id)
+        if (!doctor) {
+            render(status: 404, text: 'Доктора нема')
+            return
+        }
+        render(view: 'list', model: [specialists: [doctor], specialistsTotal: 1])
     }
 
     def edit(Long id) {

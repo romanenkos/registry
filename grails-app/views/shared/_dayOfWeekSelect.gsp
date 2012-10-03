@@ -1,0 +1,2 @@
+<g:select name="day" from="${registry.DayOfWeek?.values()}"  keys="${registry.DayOfWeek.values()*.name()}"
+          optionKey="name" optionValue="${{it.getName()}}" required="" value="${scheduleItemInstance?.day?.name()}"/>
