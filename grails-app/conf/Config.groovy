@@ -58,6 +58,21 @@ grails.exceptionresolver.params.exclude = ['password']
 
 // enable query caching by default
 grails.hibernate.cache.queries = true
+//
+
+grails {
+    mail {
+        host = "smtp.gmail.com"
+        port = 465
+        username = "registry.cn.ua@gmail.com"
+        password = "7rerevrfkjr"
+        props = ["mail.smtp.auth":"true",
+                "mail.smtp.socketFactory.port":"465",
+                "mail.smtp.socketFactory.class":"javax.net.ssl.SSLSocketFactory",
+                "mail.smtp.socketFactory.fallback":"false"]
+
+    } }
+
 
 // set per-environment serverURL stem for creating absolute links
 environments {

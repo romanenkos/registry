@@ -30,18 +30,7 @@ class DistrictController {
         redirect(action: "edit", id: districtInstance.id)
     }
 
-    def show(Long id) {
-        def districtInstance = District.get(id)
-        if (!districtInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'district.label', default: 'District'), id])
-            redirect(action: "list")
-            return
-        }
-
-        [districtInstance: districtInstance]
-    }
-
-    def edit(Long id) {
+     def edit(Long id) {
         def districtInstance = District.get(id)
         if (!districtInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'district.label', default: 'District'), id])

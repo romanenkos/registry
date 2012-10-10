@@ -4,16 +4,12 @@ import org.springframework.dao.DataIntegrityViolationException
 
 class AddressController {
 
-    static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+    static allowedMethods = [save: "POST", update: "POST", delete: "GET"]
 
     def index() {
         redirect(action: "list", params: params)
     }
 
-    def list() {
-        params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        [addressInstanceList: Address.list(params), addressInstanceTotal: Address.count()]
-    }
 
     def create() {
         if (params.get("district.id")) {
@@ -33,18 +29,7 @@ class AddressController {
         }
 
         flash.message = message(code: 'default.created.message', args: [message(code: 'address.label', default: 'Address'), addressInstance.id])
-        redirect(controller: 'district', action: 'show', id: addressInstance.district.id)
-    }
-
-    def show() {
-        def addressInstance = Address.get(params.id)
-        if (!addressInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'address.label', default: 'Address'), params.id])
-            redirect(action: "list")
-            return
-        }
-
-        [addressInstance: addressInstance]
+        redirect(controller: 'district', action: 'edit', id: addressInstance.district.id)
     }
 
     def edit() {
@@ -92,18 +77,19 @@ class AddressController {
         def addressInstance = Address.get(params.id)
         if (!addressInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'address.label', default: 'Address'), params.id])
-            redirect(action: "list")
+            redirect(controller: "district", action: "list")
             return
         }
 
         try {
+            def districtId = addressInstance.districtId
             addressInstance.delete(flush: true)
             flash.message = message(code: 'default.deleted.message', args: [message(code: 'address.label', default: 'Address'), params.id])
-            redirect(action: "list")
+            redirect(controller: "district", action: "edit", id: districtId)
         }
         catch (DataIntegrityViolationException e) {
             flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'address.label', default: 'Address'), params.id])
-            redirect(action: "show", id: params.id)
+            redirect(controller: "district", action: "list")
         }
     }
 

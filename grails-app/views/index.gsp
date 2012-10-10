@@ -7,6 +7,9 @@
 
 <body>
 <g:render template="/shared/navigtion"/>
+<g:if test="${flash.message}">
+    <div class="message" role="status">${flash.message}</div>
+</g:if>
 <g:render template="/shared/searchByAddressForm"/>
 <g:render template="/shared/searchByNameForm"/>
 

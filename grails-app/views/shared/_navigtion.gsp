@@ -12,5 +12,6 @@
         <g:if test="${create}">
             <li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
         </g:if>
+        <li><g:link class="list" controller="backup" action="backup">Відіслати данні на пошту</g:link></li>
     </ul>
 </div>
