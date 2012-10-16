@@ -2,7 +2,9 @@ package registry
 
 import grails.web.JSONBuilder
 import java.text.SimpleDateFormat
+import grails.plugins.springsecurity.Secured
 
+@Secured(['ROLE_ADMIN'])
 class BackupController {
 
     def index() {

@@ -1,5 +1,8 @@
 package registry
 
+import grails.plugins.springsecurity.Secured
+
+
 class ScheduleItemController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
@@ -13,6 +16,7 @@ class ScheduleItemController {
         [specialists: Doctor.list(params), specialistsTotal: Doctor.count()]
     }
 
+    @Secured(['ROLE_ADMIN'])
     def createIrregular(long id) {
         Doctor doc = Doctor.findById(id);
         if (!doc) {
@@ -25,6 +29,7 @@ class ScheduleItemController {
         }
     }
 
+    @Secured(['ROLE_ADMIN'])
     def createRegular(long id) {
         Doctor doc = Doctor.findById(id);
         if (!doc) {
@@ -37,6 +42,7 @@ class ScheduleItemController {
         }
     }
 
+    @Secured(['ROLE_ADMIN'])
     def save() {
 
         params['date'] = params.date('date', 'dd-MM-yyyy')
@@ -55,6 +61,7 @@ class ScheduleItemController {
         redirect(action: "editForDoctor", id: scheduleItemInstance.doctor.id)
     }
 
+    @Secured(['ROLE_ADMIN'])
     def editForDoctor(Long id) {
         def doctor = Doctor.get(id)
         if (!doctor) {
@@ -64,6 +71,7 @@ class ScheduleItemController {
         render(view: 'list', model: [specialists: [doctor], specialistsTotal: 1])
     }
 
+    @Secured(['ROLE_ADMIN'])
     def edit(Long id) {
         def scheduleItemInstance = ScheduleItem.get(id)
         if (!scheduleItemInstance) {

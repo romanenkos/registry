@@ -1,6 +1,7 @@
 package registry
 
 import org.springframework.dao.DataIntegrityViolationException
+import grails.plugins.springsecurity.Secured
 
 class AddressController {
 
@@ -10,7 +11,7 @@ class AddressController {
         redirect(action: "list", params: params)
     }
 
-
+    @Secured(['ROLE_ADMIN'])
     def create() {
         if (params.get("district.id")) {
             [addressInstance: new Address(params)]
@@ -21,6 +22,7 @@ class AddressController {
 
     }
 
+    @Secured(['ROLE_ADMIN'])
     def save() {
         def addressInstance = new Address(params)
         if (!addressInstance.save(flush: true)) {
@@ -32,6 +34,7 @@ class AddressController {
         redirect(controller: 'district', action: 'edit', id: addressInstance.district.id)
     }
 
+    @Secured(['ROLE_ADMIN'])
     def edit() {
         def addressInstance = Address.get(params.id)
         if (!addressInstance) {
@@ -43,6 +46,7 @@ class AddressController {
         [addressInstance: addressInstance]
     }
 
+    @Secured(['ROLE_ADMIN'])
     def update() {
         def addressInstance = Address.get(params.id)
         if (!addressInstance) {
@@ -73,6 +77,7 @@ class AddressController {
         redirect(controller: "district", action: "edit", id: addressInstance.district.id)
     }
 
+    @Secured(['ROLE_ADMIN'])
     def delete() {
         def addressInstance = Address.get(params.id)
         if (!addressInstance) {

@@ -33,7 +33,7 @@ environments {
             username = 'n/a'
             password = 'n/a'
             url = 'jdbc:mysql://localhost/db?useUnicode=true&characterEncoding=utf8'
-            dbCreate = 'create-drop'
+            dbCreate = 'update'
         }
     }
 //    production {

@@ -1,7 +1,9 @@
 package registry
 
 import grails.converters.JSON
+import grails.plugins.springsecurity.Secured
 
+@Secured(['ROLE_ADMIN'])
 class RestoreController {
     static allowedMethods = [restore: "POST"]
     def index() {
