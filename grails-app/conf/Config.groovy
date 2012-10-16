@@ -65,7 +65,7 @@ grails {
         host = "smtp.gmail.com"
         port = 465
         username = "registry.cn.ua@gmail.com"
-        password = "7rerevrfkjr"
+        password = "xxx"
         props = ["mail.smtp.auth":"true",
                 "mail.smtp.socketFactory.port":"465",
                 "mail.smtp.socketFactory.class":"javax.net.ssl.SSLSocketFactory",
@@ -106,4 +106,8 @@ log4j = {
            'org.hibernate',
            'net.sf.ehcache.hibernate'
 }
-grails.plugin.cloudfoundry.appname = 'registry-drrsv'
+grails.plugin.cloudfoundry.appname = '2registry-drrsv'
+// Added by the Spring Security Core plugin:
+grails.plugins.springsecurity.userLookup.userDomainClassName = 'registry.User'
+grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'registry.UserRole'
+grails.plugins.springsecurity.authority.className = 'registry.Role'
