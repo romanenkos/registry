@@ -48,6 +48,8 @@ class AngularController {
                     }
                 }
             }
+        } else {
+            render(contentType: "text/json") {}
         }
     }
 }

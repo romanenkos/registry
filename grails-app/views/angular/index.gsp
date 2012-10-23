@@ -13,7 +13,7 @@
         <div class="span2">
             <!--Sidebar content-->
 
-            Search: <input ng-model="query">
+            Search: <input ng-model="query" ng-click="showSchedule()">
 
         </div>
         <table>
