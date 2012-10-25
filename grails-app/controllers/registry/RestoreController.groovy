@@ -7,17 +7,21 @@ import java.text.SimpleDateFormat
 
 //@Secured(['ROLE_ADMIN'])
 class RestoreController {
+
+    DbCleanupService dbCleanupService
+
     static allowedMethods = [restore: "POST"]
     SimpleDateFormat sdf = new SimpleDateFormat('dd-MM-yyyy')
 
     def index() {
     }
 
+    def cleanup() {
+        dbCleanupService.cleanUp()
+        render "Ok"
+    }
+
     def restore() {
-        ScheduleItem.executeUpdate('delete from ScheduleItem')
-        Address.executeUpdate('delete from Address')
-        District.executeUpdate('delete from District')
-        Doctor.executeUpdate('delete from Doctor')
 
         def f = request.getFile('myFile')
         if (f.empty) {

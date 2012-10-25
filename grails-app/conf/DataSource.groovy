@@ -13,6 +13,8 @@ hibernate {
 environments {
     development {
         dataSource {
+            dialect = org.hibernate.dialect.H2Dialect
+            driverClassName = "org.h2.Driver"
             dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
             url = "jdbc:h2:mem:devDb;MVCC=TRUE"
         }
@@ -26,27 +28,27 @@ environments {
 
 
 
-    production {
-        dataSource {
-            dialect = org.hibernate.dialect.MySQLInnoDBDialect
-            driverClassName = 'com.mysql.jdbc.Driver'
-            username = 'n/a'
-            password = 'n/a'
-            url = 'jdbc:mysql://localhost/db?characterEncoding=utf8'
-            dbCreate = 'create'
-        }
-    }
-
 //    production {
 //        dataSource {
-//            dialect = org.hibernate.dialect.PostgreSQLDialect
-//            driverClassName = 'org.postgresql.Driver'
+//            dialect = org.hibernate.dialect.MySQLInnoDBDialect
+//            driverClassName = 'com.mysql.jdbc.Driver'
 //            username = 'n/a'
 //            password = 'n/a'
-//            url = 'jdbc:postgresql://localhost/db?charSet=utf8'
-//            dbCreate = 'update'
+//            url = 'jdbc:mysql://localhost/db?characterEncoding=utf8'
+//            dbCreate = 'create-drop'
 //        }
 //    }
+
+    production {
+        dataSource {
+            dialect = org.hibernate.dialect.PostgreSQLDialect
+            driverClassName = 'org.postgresql.Driver'
+            username = 'n/a'
+            password = 'n/a'
+            url = 'jdbc:postgresql://localhost/db?charSet=utf8'
+            dbCreate = 'update'
+        }
+    }
 //    production {
 //        dataSource {
 //            dbCreate = "update"
