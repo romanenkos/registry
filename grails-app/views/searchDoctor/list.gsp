@@ -2,18 +2,21 @@
 <html>
 <head>
     <meta name="layout" content="main">
-    <title>Специалисты</title>
+    <title>Спеціалісти</title>
 </head>
 <body>
 <g:render template="/shared/navigtion"/>
 <div id="" class="content scaffold-list" role="main">
-    <h1>Специалисты</h1>
+    <h1>Спеціалісти</h1>
     <table>
         <thead>
         <tr>
-            <th>Специализация</th>
-            <th>Ф.И.О</th>
-            <th>Расписание</th>
+            <th>Спеціалізація</th>
+            <th>П.І.Б</th>
+            <th></th>
+            <sec:ifLoggedIn>
+                <th></th>
+            </sec:ifLoggedIn>
         </tr>
         </thead>
         <tbody>
@@ -22,6 +25,10 @@
                 <td>${item.speciality.name}</td>
                 <td>${item.fullName}</td>
                 <td><g:link controller="searchDoctor" action="scheduleById" id="${item.id}">Графiк роботи</g:link></td>
+                <sec:ifLoggedIn>
+                    <td><g:link controller="doctor" action="edit" id="${item.id}">Редагувати</g:link></td>
+                </sec:ifLoggedIn>
+
             </tr>
         </g:each>
         </tbody>

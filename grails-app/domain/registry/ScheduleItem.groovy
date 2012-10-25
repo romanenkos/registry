@@ -7,7 +7,9 @@ class ScheduleItem {
     String workingTime
     ScheduleItemType type = ScheduleItemType.REGULAR
     Date date
-    Doctor doctor
+
+
+    static belongsTo = [doctor: Doctor]
 
     static mapping = {
         day(enumType: "ordinal")

@@ -1,4 +1,4 @@
-<%@ page import="registry.District" %>
+<%@ page import="registry.Speciality; registry.District" %>
 
 
 <g:hiddenField name="number" value="${districtInstance?.number}"/>
@@ -7,7 +7,7 @@
         <g:message code="district.doctors.label" default="Doctors"/>
 
     </label>
-    <g:select name="doctors" from="${registry.Doctor.list()}" multiple="multiple" optionKey="id" size="5"
+    <g:select name="doctors" from="${registry.Doctor.findAllBySpeciality(Speciality.S0)}" multiple="multiple" optionKey="id" size="5"
               optionValue="fullName" value="${districtInstance?.doctors*.id}" class="many-to-many"/>
 </div>
 

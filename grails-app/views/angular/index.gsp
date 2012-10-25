@@ -16,24 +16,24 @@
             Search: <input ng-model="query" ng-click="showSchedule()">
 
         </div>
-        <table>
+        <table border="1">
             <tr>
                 <td>
-                    <div class="span10">
+                    <div class="span10" style="overflow-y: scroll;">
                         <!--Body content-->
 
                         <ul class="doctors">
                             <li ng-repeat="doctor in doctors | filter:query">
-                                <span ng-src="{{doctor.id}}"
-                                      ng-click="showSchedule(doctor.id)">{{doctor.lastName}}&nbsp;{{doctor.firstName}}&nbsp;{{doctor.middleName}}</span>
+                                <span ng-src="{{doctor.id}}" ng-click="showSchedule(doctor.id)">{{doctor.lastName}}&nbsp;{{doctor.firstName}}&nbsp;{{doctor.middleName}}</span>
 
                             </li>
                         </ul>
                     </div>
                 </td>
-                <td>
+                <td style="vertical-align: top">
                     <div>
                         <ul class="scheduleItems">
+                            {{scheduleItems}}
                             <li ng-repeat="item in scheduleItems">
                                 {{item.day}}&nbsp;{{item.workingTime}}&nbsp;{{item.room}}
 

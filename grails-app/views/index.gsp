@@ -10,23 +10,22 @@
 <g:if test="${flash.message}">
     <div class="message" role="status">${flash.message}</div>
 </g:if>
-<g:render template="/shared/searchByAddressForm"/>
-<g:render template="/shared/searchByNameForm"/>
+%{--<g:render template="/shared/searchByAddressForm"/>--}%
+%{--<g:render template="/shared/searchByNameForm"/>--}%
 
-<table>
-    <tr>
-        <td>
-            <div id="controller-list" role="navigation">
-                <h2>Available Controllers:</h2>
-                <ul>
-                    <g:each var="c" in="${grailsApplication.controllerClasses.sort { it.fullName }}">
-                        <li class="controller"><g:link controller="${c.logicalPropertyName}">${c.fullName}</g:link></li>
-                    </g:each>
-                </ul>
-            </div>
-        </td>
-    </tr>
-    </tbody>
-</table>
+%{--<table>--}%
+    %{--<tr>--}%
+        %{--<td>--}%
+            %{--<div id="controller-list" role="navigation">--}%
+                %{--<h2>Available Controllers:</h2>--}%
+                %{--<ul>--}%
+                    %{--<g:each var="c" in="${grailsApplication.controllerClasses.sort { it.fullName }}">--}%
+                        %{--<li class="controller"><g:link controller="${c.logicalPropertyName}">${c.fullName}</g:link></li>--}%
+                    %{--</g:each>--}%
+                %{--</ul>--}%
+            %{--</div>--}%
+        %{--</td>--}%
+    %{--</tr>--}%
+%{--</table>--}%
 </body>
 </html>

@@ -2,11 +2,19 @@ package registry
 
 class Address {
 
-    String address
-    District district
+    String kind
+    String street
+    String numbers = ''
 
+    static belongsTo = [district: District]
 
+    String getAddress(){
+        "${kind} ${street} ${numbers}"
+    }
     static constraints = {
-         address maxSize: 500
+        street maxSize: 500
+    }
+    static mapping = {
+        sort "street"
     }
 }

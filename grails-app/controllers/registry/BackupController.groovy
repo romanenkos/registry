@@ -4,15 +4,17 @@ import grails.web.JSONBuilder
 import java.text.SimpleDateFormat
 import grails.plugins.springsecurity.Secured
 
-@Secured(['ROLE_ADMIN'])
+//@Secured(['ROLE_ADMIN'])
 class BackupController {
+    SimpleDateFormat sdf = new SimpleDateFormat('dd-MM-yyyy')
 
     def index() {
         render(contentType: "text/json") {
             registry = {
-                specialists = array {
-                    for (s in Doctor.findAllBySpecialityNotEqual(Speciality.S0)) {
-                        specialist = {
+                doctors = array {
+                    for (s in Doctor.list()) {
+                        doc = {
+                            id = s.id
                             firstName = s.firstName
                             lastName = s.lastName
                             middleName = s.middleName
@@ -24,7 +26,7 @@ class BackupController {
                                         room = item.room
                                         workingTime = item.workingTime
                                         type = item.type
-                                        date = item.date
+                                        date = null != item.date ? sdf.format(item.date) : null
                                     }
                                 }
                             }
@@ -39,28 +41,23 @@ class BackupController {
                             addresses = array {
                                 for (a in d.addresses) {
                                     address = {
-                                        address = a.address
+                                        street = a.street
+                                        kind = a.kind
+                                        numbers = a.numbers
                                     }
                                 }
                             }
-                            doctors = array {
-                                for (s in d.doctors) {
-                                    specialist = {
-                                        firstName = s.firstName
-                                        lastName = s.lastName
-                                        middleName = s.middleName
-                                        speciality = s.speciality
-                                        scheduleItems = array {
-                                            for (item in s.scheduleItems) {
-                                                ite = {
-                                                    day = item.day
-                                                    room = item.room
-                                                    workingTime = item.workingTime
-                                                    type = item.type
-                                                    date = item.date
-                                                }
-                                            }
-                                        }
+                        }
+                    }
+                }
+                doctorsForDistricts = array {
+                    for (d in District.list()) {
+                        xx = {
+                            number = d.number
+                            doctorIds = array {
+                                for (doc in d.doctors) {
+                                    docId = {
+                                        id = doc.id
                                     }
                                 }
                             }
@@ -77,9 +74,10 @@ class BackupController {
         def builder = new JSONBuilder()
         def result = builder.build {
             registry = {
-                specialists = array {
-                    for (s in Doctor.findAllBySpecialityNotEqual(Speciality.S0)) {
-                        specialist = {
+                doctors = array {
+                    for (s in Doctor.list()) {
+                        doc = {
+                            id = s.id
                             firstName = s.firstName
                             lastName = s.lastName
                             middleName = s.middleName
@@ -91,7 +89,7 @@ class BackupController {
                                         room = item.room
                                         workingTime = item.workingTime
                                         type = item.type
-                                        date = item.date
+                                        date = null != item.date ? sdf.format(item.date) : null
                                     }
                                 }
                             }
@@ -106,28 +104,23 @@ class BackupController {
                             addresses = array {
                                 for (a in d.addresses) {
                                     address = {
-                                        address = a.address
+                                        street = a.street
+                                        kind = a.kind
+                                        numbers = a.numbers
                                     }
                                 }
                             }
-                            doctors = array {
-                                for (s in d.doctors) {
-                                    specialist = {
-                                        firstName = s.firstName
-                                        lastName = s.lastName
-                                        middleName = s.middleName
-                                        speciality = s.speciality
-                                        scheduleItems = array {
-                                            for (item in s.scheduleItems) {
-                                                ite = {
-                                                    day = item.day
-                                                    room = item.room
-                                                    workingTime = item.workingTime
-                                                    type = item.type
-                                                    date = item.date
-                                                }
-                                            }
-                                        }
+                        }
+                    }
+                }
+                doctorsForDistricts = array {
+                    for (d in District.list()) {
+                        xx = {
+                            number = d.number
+                            doctorIds = array {
+                                for (doc in d.doctors) {
+                                    docId = {
+                                        id = doc.id
                                     }
                                 }
                             }

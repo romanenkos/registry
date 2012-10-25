@@ -16,7 +16,7 @@ class SearchDoctorController {
     }
 
     def byLastName(String lastName) {
-        render(view: "list", model: [specialists: Doctor.findAllByLastNameLike("%${lastName}%").sort()])
+        render(view: "list", model: [specialists: Doctor.findAllByLastNameIlike("%${lastName}%").sort()])
     }
 
     def scheduleById(long id) {

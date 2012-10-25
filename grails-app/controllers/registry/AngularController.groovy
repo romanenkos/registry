@@ -1,5 +1,7 @@
 package registry
 
+import grails.converters.JSON
+
 class AngularController {
 
     DoctorScheduleService doctorScheduleService
@@ -9,7 +11,7 @@ class AngularController {
     def doctors() {
         render(contentType: "text/json") {
             array {
-                for (s in Doctor.findAllBySpeciality(Speciality.S0)) {
+                for (s in Doctor.list()) {
                     specialist = {
                         id = s.id
                         firstName = s.firstName
@@ -51,5 +53,8 @@ class AngularController {
         } else {
             render(contentType: "text/json") {}
         }
+    }
+    def addresses(){
+        render Address.list() as JSON
     }
 }

@@ -32,10 +32,21 @@ environments {
             driverClassName = 'com.mysql.jdbc.Driver'
             username = 'n/a'
             password = 'n/a'
-            url = 'jdbc:mysql://localhost/db?useUnicode=true&characterEncoding=utf8'
-            dbCreate = 'update'
+            url = 'jdbc:mysql://localhost/db?characterEncoding=utf8'
+            dbCreate = 'create'
         }
     }
+
+//    production {
+//        dataSource {
+//            dialect = org.hibernate.dialect.PostgreSQLDialect
+//            driverClassName = 'org.postgresql.Driver'
+//            username = 'n/a'
+//            password = 'n/a'
+//            url = 'jdbc:postgresql://localhost/db?charSet=utf8'
+//            dbCreate = 'update'
+//        }
+//    }
 //    production {
 //        dataSource {
 //            dbCreate = "update"

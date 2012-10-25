@@ -99,7 +99,10 @@ class AddressController {
     }
 
     def search(String address) {
+        [addresses: Address.findAllByStreetIlike("%${address}%").sort {a1, a2 -> a1.street <=> a2.street}]
+    }
 
-        [addresses: Address.findAllByAddressLike("%${address}%")]
+    def list(){
+        render(view: 'search', model: [addresses: Address.findAll(sort: 'street')])
     }
 }
