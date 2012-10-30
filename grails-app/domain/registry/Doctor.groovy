@@ -7,6 +7,9 @@ class Doctor implements Comparable<Doctor> {
 
     Speciality speciality
 
+
+    List<ScheduleItem> scheduleItems
+
     String getFullName() {
         "${lastName} ${firstName} ${middleName}"
     }

@@ -82,4 +82,16 @@ class ScheduleItemController {
 
         [scheduleItemInstance: scheduleItemInstance]
     }
+
+    @Secured(['ROLE_ADMIN'])
+    def test(Long id) {
+        def scheduleItemInstance = ScheduleItem.get(id)
+        if (!scheduleItemInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'scheduleItem.label', default: 'ScheduleItem'), id])
+            redirect(action: "list")
+            return
+        }
+
+        [scheduleItemInstance: scheduleItemInstance]
+    }
 }

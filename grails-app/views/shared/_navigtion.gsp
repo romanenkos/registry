@@ -18,7 +18,6 @@
 </table>
 %{--<sec:ifLoggedIn>--}%
     <ul>
-        <li><g:link class="list" controller="scheduleItem" action="list">Редагування графіку роботи</g:link></li>
         <li><g:link class="list" controller="district" action="list">Редагування дільниць</g:link></li>
         <li><g:link class="list" controller="doctor" action="list">Редагування лікарів</g:link></li>
         <g:if test="${create}">

@@ -3,10 +3,13 @@ package registry
 class ScheduleItem {
 
     DayOfWeek day
+    ScheduleItemType type = ScheduleItemType.REGULAR
     String room
     String workingTime
-    ScheduleItemType type = ScheduleItemType.REGULAR
+    String roomNext
+    String workingTimeNext
     Date date
+
 
 
     static belongsTo = [doctor: Doctor]
@@ -18,6 +21,8 @@ class ScheduleItem {
         date nullable: true
         day nullable: true
         room nullable: true
+        roomNext nullable: true
+        workingTimeNext nullable: true
 
     }
 }

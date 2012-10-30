@@ -18,7 +18,14 @@ class DoctorController {
     }
 
     def create() {
-        [doctorInstance: new Doctor(params)]
+        Doctor d = new Doctor(params);
+        d.setScheduleItems(new ArrayList<ScheduleItem>())
+        d.getScheduleItems().add(new ScheduleItem(day: DayOfWeek.MON))
+        d.getScheduleItems().add(new ScheduleItem(day: DayOfWeek.TUE))
+        d.getScheduleItems().add(new ScheduleItem(day: DayOfWeek.WED))
+        d.getScheduleItems().add(new ScheduleItem(day: DayOfWeek.THU))
+        d.getScheduleItems().add(new ScheduleItem(day: DayOfWeek.FRI))
+        [doctorInstance: d]
     }
 
     def save() {

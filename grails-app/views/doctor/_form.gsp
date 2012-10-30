@@ -31,7 +31,8 @@
     </label>
     <g:render template="/shared/specialitySelect" model="['doctorInstance' : doctorInstance]"/>
 </div>
-<div class="fieldcontain">
-    <g:link controller="scheduleItem" action="editForDoctor" id="${doctorInstance?.id}">Редагувати розклад роботи</g:link>
+<div>
+    %{--<g:link controller="scheduleItem" action="editForDoctor" id="${doctorInstance?.id}">Редагувати розклад роботи</g:link>--}%
+    <g:render template="scheduleItems"/>
 </div>
 
