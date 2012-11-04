@@ -37,24 +37,11 @@ class AngularController {
     }
 
     def schedule(long id) {
-        def doctor = Doctor.findById(id)
-        if (doctor) {
-            render(contentType: "text/json") {
-                array {
-                    for (s in doctorScheduleService.findSchedule(doctor, 0)) {
-                        item = {
-                            workingTime = s.workingTime
-                            day = s.day.name
-                            room = s.room
-                        }
-                    }
-                }
-            }
-        } else {
-            render(contentType: "text/json") {}
-        }
+        def schedule = doctorScheduleService.findSchedule(Doctor.get(id), 0).collect {[day: it.day.name, workingTime: it.workingTime, room: it.room]}
+        render schedule as JSON
     }
-    def addresses(){
+
+    def addresses() {
         render Address.list() as JSON
     }
 }

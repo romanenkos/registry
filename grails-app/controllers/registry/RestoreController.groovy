@@ -8,8 +8,6 @@ import java.text.SimpleDateFormat
 //@Secured(['ROLE_ADMIN'])
 class RestoreController {
 
-    DbCleanupService dbCleanupService
-
     static allowedMethods = [restore: "POST"]
     SimpleDateFormat sdf = new SimpleDateFormat('dd-MM-yyyy')
 
@@ -17,7 +15,6 @@ class RestoreController {
     }
 
     def cleanup() {
-        dbCleanupService.cleanUp()
         render "Ok"
     }
 

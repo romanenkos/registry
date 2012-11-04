@@ -11,8 +11,9 @@ import static registry.DayOfWeek.dateForDayOfWeek
 
 class DoctorScheduleService {
     List<Map> findSchedule(@NotNull Doctor doctor, int weekCount = 0) {
-        Calendar cnd = Calendar.getInstance();
-        cnd.add(Calendar.WEEK_OF_YEAR, weekCount);
+        Calendar cnd = Calendar.getInstance()
+        cnd.add(Calendar.WEEK_OF_YEAR, weekCount)
+
         def regular = ScheduleItem.findAllByDoctorAndType(doctor, REGULAR)
         def irregular = ScheduleItem.findAllByDoctorAndTypeAndDateGreaterThanEquals(doctor, IRREGULAR, startDateOfWeek(cnd.getTime()))
                 .findAll {it.date <= endDateOfWeek(cnd.getTime())}
