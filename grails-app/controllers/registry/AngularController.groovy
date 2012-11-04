@@ -9,31 +9,7 @@ class AngularController {
     def index() { }
 
     def doctors() {
-        render(contentType: "text/json") {
-            array {
-                for (s in Doctor.list()) {
-                    specialist = {
-                        id = s.id
-                        firstName = s.firstName
-                        lastName = s.lastName
-                        middleName = s.middleName
-                        speciality = s.speciality
-                        scheduleItems = array {
-                            for (item in s.scheduleItems) {
-                                ite = {
-                                    day = item.day
-                                    room = item.room
-                                    workingTime = item.workingTime
-                                    type = item.type
-                                    date = item.date
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
+        render Doctor.list().collect{[firstName: it.firstName, lastName: it.lastName, middleName: it.middleName]} as JSON
     }
 
     def schedule(long id) {
